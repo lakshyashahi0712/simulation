@@ -1,0 +1,44 @@
+{
+  "name": "sentinel",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "test": "node node_modules/vitest/vitest.mjs run",
+    "test:watch": "node node_modules/vitest/vitest.mjs",
+    "test:acceptance": "node node_modules/vitest/vitest.mjs run test/release-acceptance.test.ts test/session-outbox.test.ts",
+    "test:synthetic": "node node_modules/tsx/dist/cli.mjs scripts/synthetic-acceptance.ts",
+    "test:browser": "node scripts/browser-runner.cjs",
+    "typecheck": "node node_modules/typescript/bin/tsc --noEmit",
+    "server": "npm run build:server && node scripts/server-runner.cjs",
+    "web": "node node_modules/vite/bin/vite.js --config web/vite.config.ts",
+    "web:build": "node node_modules/vite/bin/vite.js build --config web/vite.config.ts",
+    "start:release": "node scripts/release-runner.cjs",
+    "build:server": "node node_modules/typescript/bin/tsc -p tsconfig.server.json && node scripts/write-server-package.cjs",
+    "healthcheck": "node node_modules/tsx/dist/cli.mjs scripts/healthcheck.ts",
+    "backup:data": "node node_modules/tsx/dist/cli.mjs scripts/backup-data.ts"
+  },
+  "dependencies": {
+    "@fastify/cors": "^10.0.1",
+    "fastify": "^5.2.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "socket.io": "^4.8.1",
+    "three": "^0.186.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@types/three": "^0.186.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "socket.io-client": "^4.8.1",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.5",
+    "vitest": "^2.1.8"
+  }
+}

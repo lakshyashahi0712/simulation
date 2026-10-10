@@ -1,0 +1,9 @@
+{
+  "name": "SENTINEL",
+  "short_name": "SENTINEL",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#e9efed",
+  "theme_color": "#172936",
+  "icons": []
+}

@@ -1,0 +1,37 @@
+.playground-panel { grid-column: 1 / -1; }
+.world-scope { align-self: center; color: var(--muted); font-size: 10px; text-align: right; }
+.world-viewport { min-width: 0; }
+.world-toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; padding: 12px 18px; }
+.world-toolbar .button { min-height: 32px; padding: 0 10px; font-size: 11px; }
+.world-view-switch { display: flex; gap: 4px; margin-right: auto; }
+.world-view-switch [aria-pressed="true"] { color: var(--cyan); border-color: var(--cyan); background: rgba(94,224,208,.08); }
+.world-stage { position: relative; height: clamp(310px, 40vw, 480px); margin: 0 18px; overflow: hidden; border: 1px solid var(--line); border-radius: 8px; background: #091b2a; }
+.world-canvas-host, .world-plan { display: block; width: 100%; height: 100%; }
+.world-canvas-host canvas { display: block; width: 100%; height: 100%; touch-action: none; }
+.world-canvas-host canvas:focus-visible { outline: 2px solid var(--cyan); outline-offset: -3px; }
+.world-label-layer { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+.world-label { position: absolute; transform: translate(-50%, -100%); max-width: 160px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; padding: 5px 7px; border: 1px solid var(--object-tint, var(--cyan)); border-radius: 5px; background: rgba(5,14,25,.9); color: #e4edf7; font-size: 10px; pointer-events: auto; }
+.world-label[hidden] { display: none; }
+.world-label[aria-pressed="true"] { color: var(--cyan); border-color: white; box-shadow: 0 0 0 2px rgba(94,224,208,.2); }
+.world-label:focus-visible, .world-plan g:focus-visible { outline: 2px solid var(--cyan); }
+.world-plan g { cursor: pointer; }
+.world-dimensions { position: absolute; bottom: 10px; left: 10px; max-width: calc(100% - 20px); pointer-events: none; color: var(--soft); background: rgba(5,14,25,.8); padding: 5px 7px; border-radius: 4px; font: 9px var(--mono); }
+.world-help, .world-notice { margin: 0; padding: 10px 18px; color: var(--muted); font-size: 11px; line-height: 1.6; }
+.world-notice { color: var(--amber); }
+.world-loading { position: absolute; inset: 0; display: grid; place-items: center; margin: 0; color: var(--muted); font-size: 12px; pointer-events: none; }
+.world-inspector { display: flex; flex-wrap: wrap; gap: 14px; align-items: flex-start; padding: 14px 18px 18px; border-top: 1px solid var(--line); }
+.world-inspector > label { width: min(280px, 100%); }
+.world-inspector label { font-size: 11px; }
+.world-inspector select, .world-inspector input { padding: 8px 9px; font-size: 12px; }
+.world-object-summary { display: grid; gap: 5px; min-width: 0; flex: 1; font-size: 12px; overflow-wrap: anywhere; }
+.world-object-summary span { color: var(--muted); font-size: 11px; }
+.world-object-summary .world-position { color: var(--cyan); font-family: var(--mono); }
+.world-movement { display: grid; grid-template-columns: 125px 126px; gap: 10px; align-items: end; }
+.world-direction-pad { display: grid; grid-template-columns: repeat(3, 38px); gap: 4px; }
+.world-direction-pad .button { padding: 0; min-height: 32px; font-size: 17px; }
+.world-direction-pad .button:first-child { grid-column: 2; }
+.world-direction-pad .button:nth-child(2) { grid-column: 1; }
+.world-movement small { grid-column: 1 / -1; max-width: 300px; color: var(--muted); font-size: 10px; line-height: 1.6; }
+.forge-canvas-panel .world-stage { height: 330px; }
+@media (max-width: 560px) { .world-stage { height: 320px; margin: 0 12px; }.world-toolbar { padding: 12px; }.world-inspector { flex-direction: column; padding: 12px; }.world-inspector > label { width: 100%; }.world-scope { max-width: 100px; }.world-label { max-width: 120px; font-size: 9px; }.world-view-switch { width: 100%; }.world-movement { width: 100%; } }
+@media print { .playground-panel { display: none; } }

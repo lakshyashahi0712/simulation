@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: sentinel-sih-demo
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+    envVars:
+      - key: HOST
+        value: 0.0.0.0
+      - key: SENTINEL_DATA_FILE
+        value: /tmp/sentinel.json
+      - key: SENTINEL_ADMIN_TOKEN
+        generateValue: true
