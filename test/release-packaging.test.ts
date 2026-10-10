@@ -12,7 +12,7 @@ describe("release packaging", () => {
   it("serves UI assets and SPA routes while preserving API and filesystem boundaries", async () => {
     const root = mkdtempSync(join(tmpdir(), "sentinel-web-"));
     mkdirSync(join(root, "assets"));
-    writeFileSync(join(root, "index.html"), '<title>SENTINEL</title><div id="root"></div><script src="/assets/main.js"></script>');
+    writeFileSync(join(root, "index.html"), '<title>SENTINEL</title><script>window.token="__SENTINEL_ADMIN_TOKEN__";</script><div id="root"></div><script src="/assets/main.js"></script>');
     writeFileSync(join(root, "assets/main.js"), "window.sentinel = true;");
     const server = await createServer({ persistenceFile: null, autoTickMs: 0, staticWebDirectory: root });
     try {
@@ -20,6 +20,8 @@ describe("release packaging", () => {
       expect(shell.statusCode).toBe(200);
       expect(shell.headers["content-type"]).toContain("text/html");
       expect(shell.headers["cache-control"]).toBe("no-cache");
+      expect(shell.body).toContain(process.env.SENTINEL_ADMIN_TOKEN ?? "local-sentinel-admin");
+      expect(shell.body).not.toContain("__SENTINEL_ADMIN_TOKEN__");
       const asset = await server.app.inject({ method: "GET", url: "/assets/main.js" });
       expect(asset.statusCode).toBe(200);
       expect(asset.headers["content-type"]).toContain("javascript");

@@ -1,4 +1,4 @@
-import { createReadStream, existsSync, statSync } from "node:fs";
+import { createReadStream, existsSync, readFileSync, statSync } from "node:fs";
 import { extname, resolve, sep } from "node:path";
 import type { FastifyInstance } from "fastify";
 
@@ -26,6 +26,10 @@ export function registerStaticWeb(app: FastifyInstance, directory: string): void
     }
     reply.type(mime[extname(target)] ?? "application/octet-stream");
     reply.header("cache-control", target === index ? "no-cache" : "public, max-age=31536000, immutable");
+    if (target === index) {
+      const token = JSON.stringify(process.env.SENTINEL_ADMIN_TOKEN ?? "local-sentinel-admin").replaceAll("<", "\\u003c");
+      return reply.send(readFileSync(target, "utf8").replace("__SENTINEL_ADMIN_TOKEN__", token));
+    }
     return reply.send(createReadStream(target));
   });
 }

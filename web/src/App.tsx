@@ -13,7 +13,7 @@ import { nextScenarioId, scenarioReferences } from "../../src/domain/authoring.j
 import type { CommunicationChannel, ScenarioDefinition, ScenarioEvent, ScenarioObject, ScenarioObjectType } from "../../src/domain/scenario.js";
 
 const API_BASE = import.meta.env.VITE_API_URL || window.location.origin;
-const ADMIN_TOKEN = import.meta.env.VITE_ADMIN_TOKEN ?? "local-sentinel-admin";
+const ADMIN_TOKEN = import.meta.env.VITE_ADMIN_TOKEN ?? window.__SENTINEL_ADMIN_TOKEN__ ?? "local-sentinel-admin";
 const SESSION_BOOTSTRAP_KEY = "sentinel.session.bootstrap";
 
 const ROLE_OPTIONS = [
